@@ -1,33 +1,81 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>majevva - GitHub Pages</title>
-    <link rel="stylesheet" href="css/fullpage.min.css">
-    <link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
-
+    <title>Majevva's Creative Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background-color: #1a1a1a;
+        }
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .section h1 {
+            font-size: 4em;
+        }
+        .section p {
+            font-size: 1.5em;
+        }
+        #section1 { background: #333; }
+        #section2 { background: #444; }
+        #section3 { background: #555; }
+        #section4 { background: #666; }
+        .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 2em;
+        }
+        .social-links a:hover {
+            color: #ccc;
+        }
+    </style>
 </head>
 <body>
 
-    <div id="fullpage">
-        <div class="section">
-            <h1>Witaj na mojej stronie!</h1>
-            <p>Przewijaj w dół, aby zobaczyć więcej</p>
-        </div>
-        
-        <div class="section">
-            <h2>O mnie</h2>
-            <p>Jestem majevva i to moja strona GitHub Pages!</p>
-        </div>
-
-        <div class="section">
-            <h2>Kontakt</h2>
-            <p>Możesz mnie znaleźć na GitHubie: <a href="https://github.com/majevva" target="_blank">@majevva</a></p>
+<div id="fullpage">
+    <div class="section" id="section1">
+        <h1>Hello, I'm Majevva</h1>
+        <p>Welcome to my creative portfolio</p>
+    </div>
+    <div class="section" id="section2">
+        <h1>About Me</h1>
+        <p>I'm a passionate developer with a love for creating amazing web experiences.</p>
+    </div>
+    <div class="section" id="section3">
+        <h1>My Work</h1>
+        <p>Check out some of my recent projects on GitHub.</p>
+    </div>
+    <div class="section" id="section4">
+        <h1>Contact</h1>
+        <p>Let's collaborate! Find me on GitHub or reach out via email.</p>
+        <div class="social-links">
+            <a href="https://github.com/majevva" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="mailto:majevva@example.com" target="_blank"><i class="fas fa-envelope"></i></a>
         </div>
     </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    new fullpage('#fullpage', {
+        autoScrolling: true,
+        navigation: true,
+        navigationPosition: 'right',
+        navigationTooltips: ['Home', 'About', 'Work', 'Contact'],
+        showActiveTooltip: true,
+        slidesNavigation: true,
+        slidesNavPosition: 'bottom'
+    });
+</script>
 
 </body>
 </html>
