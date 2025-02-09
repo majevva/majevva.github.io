@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# 1. Instalacja x11vnc i utworzenie hasła
+sudo apt update
+sudo apt install -y x11vnc
+x11vnc -storepasswd
+
+# 2. Utworzenie pliku usługi systemd (zamień USER na swoją nazwę)
+sudo bash -c 'cat > /etc/systemd/system/x11vnc.service <<EOF
+[Unit]
+Description=Start x11vnc at startup
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/x11vnc -forever -display :0 -auth /var/lib/mdm/:0.Xauth -rfbauth /home/USER/.vnc/passwd -rfbport 5900 -bg -o /var/log/x11vnc.log
+User=USER
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+
+# Włączenie usługi przy starcie i jej uruchomienie
+sudo systemctl daemon-reload
+sudo systemctl enable x11vnc.service
+sudo systemctl start x11vnc.service
+
+# 3. Konfiguracja statycznego IP (dostosuj nazwę interfejsu i adresy)
+sudo bash -c 'cat > /etc/netplan/01-network-manager-all.yaml <<EOF
+network:
+  version: 2
+  renderer: NetworkManager
+  ethernets:
+    enp3s0:
+      addresses:
+        - 192.168.1.100/24
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses: [8.8.8.8,1.1.1.1]
+EOF'
+
+sudo netplan apply
+
+# 4. Nadanie nazwy hosta (hostname) i dopisanie do /etc/hosts
+sudo hostnamectl set-hostname MOJ_SERWER
+sudo bash -c 'echo "192.168.1.100 MOJ_SERWER" >> /etc/hosts'
+
+echo "Konfiguracja zakończona. Możesz łączyć się z VNC na MOJ_SERWER (lub 192.168.1.100)."
